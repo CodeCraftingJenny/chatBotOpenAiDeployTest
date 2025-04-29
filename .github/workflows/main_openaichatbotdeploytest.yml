@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'openAIChatbotDeployTest'
           slot-name: 'Production'
-          package: dist
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AA1FC58AF1B64E2EB57D3151E40387CE }}
