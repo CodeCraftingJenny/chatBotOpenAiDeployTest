@@ -23,6 +23,13 @@ jobs:
         with:
           node-version: '20.x'
 
+      - name: Create .env file from GitHub secrets
+        run: |
+          echo VITE_AZURE_OPENAI_KEY=${{ secrets.VITE_AZURE_OPENAI_KEY }} >> .env
+          echo VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }} >> .env
+          echo VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }} >> .env
+          echo VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }} >> .env
+     
       - name: npm install, build, and test
         run: |
           npm install
@@ -54,5 +61,5 @@ jobs:
         with:
           app-name: 'openAIChatbotDeployTest'
           slot-name: 'Production'
-          package: .
+          package: dist
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AA1FC58AF1B64E2EB57D3151E40387CE }}
