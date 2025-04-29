@@ -25,11 +25,11 @@ jobs:
 
       - name: Create .env file from GitHub secrets
         run: |
-          echo VITE_AZURE_OPENAI_KEY=${{ secrets.VITE_AZURE_OPENAI_KEY }} >> .env
-          echo VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }} >> .env
-          echo VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }} >> .env
-          echo VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }} >> .env
-     
+            "VITE_AZURE_OPENAI_KEY=${{ secrets.VITE_AZURE_OPENAI_KEY }}" | Out-File -FilePath .env -Encoding utf8 -Append
+            "VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }}" | Out-File -FilePath .env -Encoding utf8 -Append
+            "VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }}" | Out-File -FilePath .env -Encoding utf8 -Append
+            "VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }}" | Out-File -FilePath .env -Encoding utf8 -Append
+      
       - name: npm install, build, and test
         run: |
           npm install
