@@ -25,10 +25,10 @@ jobs:
 
       - name: Create .env file from GitHub secrets
         run: |
-            "VITE_AZURE_OPENAI_KEY=${{ secrets.VITE_AZURE_OPENAI_KEY }}" | Out-File -FilePath .env -Encoding utf8 -Append
-            "VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }}" | Out-File -FilePath .env -Encoding utf8 -Append
-            "VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }}" | Out-File -FilePath .env -Encoding utf8 -Append
-            "VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }}" | Out-File -FilePath .env -Encoding utf8 -Append
+          echo VITE_AZURE_OPENAI_KEY=${{ secrets.VITE_AZURE_OPENAI_KEY }} >> .env
+          echo VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }} >> .env
+          echo VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }} >> .env
+          echo VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }} >> .env
       
       - name: npm install, build, and test
         run: |
@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: dist
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
