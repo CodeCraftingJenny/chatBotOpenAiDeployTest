@@ -1,6 +1,5 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - openAIChatbotDeployTest
 
 on:
@@ -13,7 +12,7 @@ jobs:
   build:
     runs-on: windows-latest
     permissions:
-      contents: read #This is required for actions/checkout
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -29,18 +28,17 @@ jobs:
           "VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }}" | Out-File -FilePath .env -Encoding utf8 -Append
           "VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }}" | Out-File -FilePath .env -Encoding utf8 -Append
           "VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }}" | Out-File -FilePath .env -Encoding utf8 -Append
-     
-      - name: npm install, build, and test
+
+      - name: Install dependencies and build
         run: |
           npm install
-          npm run build --if-present
-          npm run test --if-present
-      
-      - name: Upload artifact for deployment job
+          npm run build
+
+      - name: Upload build artifact (dist folder)
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,13 +46,14 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: node-app
-      
+          path: dist
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
