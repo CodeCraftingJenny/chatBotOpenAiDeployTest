@@ -8,7 +8,7 @@ const App = () => {
   const [chatHistory, setChatHistory] = useState([
     {
       role: "system",
-      text: "👋 Welcome to the CPABC IT Support Chatbot! This chatbot is designed to assist co-op students with IT-related questions from the External IT Support Manual.\n\nBegin chatting by typing your question, and the chatbot will provide answers based on the manual’s content."
+      text: "Welcome to the CPABC IT Support Chatbot! This chatbot is designed to assist co-op students with IT-related questions from the External IT Support Manual.\n\nBegin chatting by typing your question, and the chatbot will provide answers based on the manual’s content."
     },
     { hideInChat: true,
       role: "system", 
