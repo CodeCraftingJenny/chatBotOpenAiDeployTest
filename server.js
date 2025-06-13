@@ -3,6 +3,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Server restored on June 13
+
+process.on('uncaughtException', err => {
+  console.error('💥 Uncaught Exception:', err);
+});
+
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = process.env.PORT || 3000;
@@ -14,5 +19,8 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
+}).on('error', (err) => {
+  console.error('❌ Server failed to start:', err);
 });
+
