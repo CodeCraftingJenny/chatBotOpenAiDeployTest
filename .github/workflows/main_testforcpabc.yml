@@ -54,11 +54,6 @@ jobs:
           name: node-app
           path: dist
 
-      - name: 'Azure Login'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_39CA34D2884F421E95EEBBCA90D0843D }}
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
