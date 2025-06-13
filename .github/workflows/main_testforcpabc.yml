@@ -61,6 +61,6 @@ jobs:
           app-name: 'ITSupportChatBotJenny'
           slot-name: 'Production'
           package: dist
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_39CA34D2884F421E95EEBBCA90D0843D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7A3F493FFC8E4E9483D3E5EB38132D62 }}
 
 
