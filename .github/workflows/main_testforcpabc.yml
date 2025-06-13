@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - testforCPABC
+name: Build and deploy Node.js app to Azure Web App - ITSupportChatBotJenny
 
 on:
   push:
@@ -18,25 +18,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
 
-      - name: Install backend and frontend dependencies
-        run: npm install
+      - name: Create .env file from GitHub secrets
+        run: |
+          echo "VITE_AZURE_OPENAI_KEY=${{ secrets.VITE_AZURE_OPENAI_KEY }}" >> .env
+          echo "VITE_AZURE_OPENAI_ENDPOINT=${{ secrets.VITE_AZURE_OPENAI_ENDPOINT }}" >> .env
+          echo "VITE_AZURE_OPENAI_DEPLOYMENT=${{ secrets.VITE_AZURE_OPENAI_DEPLOYMENT }}" >> .env
+          echo "VITE_AZURE_OPENAI_API_VERSION=${{ secrets.VITE_AZURE_OPENAI_API_VERSION }}" >> .env
 
-      - name: Build frontend with Vite
-        run: npm run build
+      - name: Install dependencies and build frontend
+        run: |
+          npm install
+          npm run build
 
-      - name: Zip artifact for deployment
-        run: zip -r release.zip . -x "*.git*" "node_modules/*"
-
-      - name: Upload artifact
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: release.zip
+          path: dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,20 +48,19 @@ jobs:
       name: 'Production'
 
     steps:
-      - name: Download artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: node-app
-
-      - name: Unzip artifact
-        run: unzip release.zip
+          path: dist
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'testforCPABC'
+          app-name: 'ITSupportChatBotJenny'
           slot-name: 'Production'
-          package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7A3F493FFC8E4E9483D3E5EB38132D62 }}
+          package: dist
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_39CA34D2884F421E95EEBBCA90D0843D }}
+
 
