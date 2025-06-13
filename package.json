@@ -1,21 +1,21 @@
 {
-  "name": "package.json",
+  "name": "chatbot-fullstack",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "cd client && npm install && npm run build",
+    "start": "node server/index.js",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "start": "pm2 serve dist --spa --no-daemon"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@azure/identity": "latest",
     "openai": "latest",
-    "pm2": "^6.0.8",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
