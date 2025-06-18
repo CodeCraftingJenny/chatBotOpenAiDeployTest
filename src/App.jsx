@@ -39,18 +39,20 @@ const App = () => {
     ];
   
     try {
-const response = await fetch("/api/chat", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    messages: messages,
-    temperature: 0.68,
-    max_tokens: 1500
-  })
-});
-
+      const response = await fetch(
+        `${import.meta.env.VITE_AZURE_OPENAI_ENDPOINT}openai/deployments/${import.meta.env.VITE_AZURE_OPENAI_DEPLOYMENT}/chat/completions?api-version=${import.meta.env.VITE_AZURE_OPENAI_API_VERSION}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "api-key": import.meta.env.VITE_AZURE_OPENAI_KEY
+          },
+          body: JSON.stringify({
+            messages: messages,
+            max_completion_tokens: 1500
+          })
+        }
+      );
   
       const data = await response.json();
       console.log("Azure OpenAI response:", data);
