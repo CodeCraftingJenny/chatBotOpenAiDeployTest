@@ -16,13 +16,19 @@ body {
 }
 
 .chatbot-popup {
-  width: 420px;
-  background: #fff;
-  border-radius: 15px;
-  box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1) 
-  0 32px 64px -48px rgba(0, 0, 0, 0.5);
+  position:fixed;
+  bottom: 90px;
+  right: 35px;
+  width: 850px;
   overflow: hidden;
-  position: relative;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0, 0.5);
+  pointer-events:none;
+  opacity: 0;
+  transform: scale(0.2);
+  transform-origin: bottom right;
+  transition: all 0.1s ease;
 }
 
 .chatbot-popup .chat-header {
@@ -75,7 +81,7 @@ body {
 }
 
 .chat-body {
-  height: 450px;
+  height: 600px;
   padding: 25px 25px;
   overflow-y: auto;
   display: flex;
@@ -109,21 +115,6 @@ body {
   color: white;
 }
 
-.chatbot-popup {
-  position:fixed;
-  bottom: 90px;
-  right: 35px;
-  width: 420px;
-  overflow: hidden;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0, 0.5);
-  pointer-events:none;
-  opacity: 0;
-  transform: scale(0.2);
-  transform-origin: bottom right;
-  transition: all 0.1s ease;
-}
 
 .container.show-chatbot .chatbot-popup {
   opacity: 1;
