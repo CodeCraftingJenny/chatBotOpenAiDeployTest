@@ -224,3 +224,20 @@ body {
 .chat-body .message.error .message-text{
   color: #ff0000;
 }
+
+.chatbot-popup.maximize {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  z-index: 1; /* bring to front of screen*/
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chatbot-popup.maximize .chat-body {
+  height: calc(100vh - 160px); /*subtract header and footer height or else chatbody does not fully show*/
+}

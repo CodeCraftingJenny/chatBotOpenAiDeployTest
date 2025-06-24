@@ -17,7 +17,8 @@ const App = () => {
     }
   ]);
 
-  const [showChatbot, setShowChatBot] = useState([false]);
+  const [maximizeChatbot, setMaximizeChatbot] = useState(false);
+  const [showChatbot, setShowChatBot] = useState(false);
   const chatBodyRef = useRef();
 
   const generateBotResponse = async (history) => {
@@ -77,8 +78,7 @@ const App = () => {
         <span className="material-symbols-rounded">chat</span>
       </button>
 
-      <div className="chatbot-popup">
-
+      <div className={`chatbot-popup ${maximizeChatbot ? "maximize" : ""}`}>
         <div className="chat-header">
           <div className="header-info">
             <ChatbotIcon />
@@ -86,9 +86,20 @@ const App = () => {
               Chatbot
             </h2>
           </div>
-          <button onClick={() => setShowChatBot(prev => !prev)} className="material-symbols-rounded">
-            keyboard_arrow_down
-          </button>
+          <div>
+            <button onClick={() => setMaximizeChatbot(prev => !prev)} className="material-symbols-rounded">
+              {maximizeChatbot ? "fullscreen_exit" : "fullscreen"}
+            </button>
+
+            <button onClick={() => {
+              setShowChatBot(prev => !prev);
+              setMaximizeChatbot(false);
+            }}
+
+              className="material-symbols-rounded">
+              keyboard_arrow_down
+            </button>
+          </div>
         </div>
 
         <div ref={chatBodyRef} className="chat-body">
