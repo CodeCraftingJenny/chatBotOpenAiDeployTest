@@ -86,7 +86,7 @@ const App = () => {
               Chatbot
             </h2>
           </div>
-          <div>
+          <div className="chat-header-buttons">
             <button onClick={() => setMaximizeChatbot(prev => !prev)} className="material-symbols-rounded">
               {maximizeChatbot ? "fullscreen_exit" : "fullscreen"}
             </button>

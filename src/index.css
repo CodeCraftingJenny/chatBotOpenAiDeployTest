@@ -234,10 +234,16 @@ body {
   border-radius: 0;
   z-index: 1; /* bring to front of screen*/
   transform: none;
-  opacity: 1;
   pointer-events: auto;
 }
 
 .chatbot-popup.maximize .chat-body {
   height: calc(100vh - 160px); /*subtract header and footer height or else chatbody does not fully show*/
 }
+
+.chat-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
